@@ -317,9 +317,16 @@ NTSTATUS DriverEntry(
 	IoControl(IOCTL_SymbolsInfo, 0, 0, 0, 0);
 	IoControl(IOCTL_CallBack, 0, 0, 0, 0);
 
+	////功能:初始化反汇编引擎
 	LDE_init();
+
+	////初始化导出函数
 	InitFunName();
+
+	////Win7 x64下进程保护与文件保护(ObRegisterCallbacks)
 	BypassCheckSign(pDriverObj);
+
+
 	nt_imagebase = GetDirverBase("ntdll.dll");
 
 	
