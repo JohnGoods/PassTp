@@ -218,10 +218,20 @@ NTSTATUS DispatchIoctl(
 			SymbolsInfo = *InBuffer;
 			
 			change_shadow_service(TRUE);
+
+			//初始化符号函数
 			InitSymbolsAddr(InBuffer);
+
+			////传入: hook地址，接管地址，原始数据地址，补丁长度；返回：原来头N字节的数据
 			change_ssdt_hook(TRUE);
-						chang_VaildAccessMask(TRUE);
+
+			//功能:调试权限
+			chang_VaildAccessMask(TRUE);
+
+
 			change_anitanit_debug(TRUE);
+
+			//安全修改内核
 			change_debugport_offset(TRUE);
 			
 			g_start_hook = TRUE;
